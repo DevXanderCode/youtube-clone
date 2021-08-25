@@ -14,7 +14,7 @@ const Card = () => {
       />
       <View style={[styles?.row, styles?.m5]}>
         <View>
-          <MaterialIcons name='account-circle' size={32} color='gray' />
+          <MaterialIcons name='account-circle' size={52} color='gray' />
         </View>
         <View style={styles?.ml10}>
           <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={2}>
@@ -29,7 +29,9 @@ const Card = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: 10,
+  },
   imgStyle: {
     width: '100%',
     height: 200,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    width: Dimensions.get('screen').width - 50,
+    width: Dimensions.get('screen').width - 90,
   },
 });
 
