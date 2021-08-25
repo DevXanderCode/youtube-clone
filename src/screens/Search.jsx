@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
+import MiniCard from '../components/MiniCard';
+
 const SearchScreen = () => {
   const [searchValue, setSearchValue] = React.useState('');
   return (
@@ -25,7 +27,15 @@ const SearchScreen = () => {
         />
         <Ionicons name='md-send' size={32} color='#212121' />
       </View>
-      <Text>Hello from the Search Screen </Text>
+
+      <ScrollView>
+        <MiniCard />
+        <MiniCard />
+        <MiniCard />
+        <MiniCard />
+        <MiniCard />
+        <MiniCard />
+      </ScrollView>
     </View>
   );
 };
