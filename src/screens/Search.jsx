@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert, FlatList } from 'react-native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
@@ -10,16 +10,16 @@ import MiniCard from '../components/MiniCard';
 const SearchScreen = () => {
   const [searchValue, setSearchValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
-  console.log('Logging api key', process.env.REACT_APP_API_KEY);
+  //   console.log('Logging api key', process.env.REACT_APP_API_KEY);
 
   const searchFunc = () => {
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchValue}&type=video&key=${process?.env?.REACT_APP_API_KEY}`
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchValue}&type=video&key=AIzaSyB9ZnNfz9BFES4TZradArd7BxgP9Q52R0s`
     )
       .then((res) => res.json())
       .then((result) => {
-        console.log('Logging search result', result);
-        setSearchResult(result);
+        // console.log('Logging search result', result);
+        setSearchResult(result.items);
       })
       .catch((err) => {
         console.log('I got this error when i try to search:', err);
@@ -57,14 +57,18 @@ const SearchScreen = () => {
         />
       </View>
 
-      <ScrollView style={{ paddingBottom: 0, marginBottom: 20 }}>
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
-      </ScrollView>
+      <FlatList
+        data={searchResult}
+        renderItem={({ item }) => (
+          <MiniCard
+            videoId={item?.id?.videoId}
+            title={item?.snippet?.title}
+            channel={item?.snippet?.channelTitle}
+            imageUrl={item?.snippet?.thumbnail?.high?.url}
+          />
+        )}
+        keyExtractor={(item) => item?.id?.videoId}
+      />
     </View>
   );
 };

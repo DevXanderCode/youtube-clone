@@ -1,20 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 
-const MiniCard = () => {
+const MiniCard = ({ channel, title, videoId, imageUrl }) => {
   return (
     <View style={[styles?.container, styles?.row]}>
       <Image
         source={{
-          uri: 'https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+          uri: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
         }}
         style={styles?.imgStyle}
       />
       <View style={styles?.textContainer}>
         <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={3}>
-          This is the mini card title
+          {title}
         </Text>
-        <Text>This is the name of the channel</Text>
+        <Text>{channel}</Text>
       </View>
     </View>
   );
