@@ -1,12 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert } from 'react-native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import MiniCard from '../components/MiniCard';
 
+//https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyB9ZnNfz9BFES4TZradArd7BxgP9Q52R0s
+
 const SearchScreen = () => {
   const [searchValue, setSearchValue] = React.useState('');
+  const [searchResult, setSearchResult] = React.useState([]);
+  console.log('Logging api key', process.env.REACT_APP_API_KEY);
+
+  const searchFunc = () => {
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchValue}&type=video&key=${process?.env?.REACT_APP_API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        console.log('Logging search result', result);
+        setSearchResult(result);
+      })
+      .catch((err) => {
+        console.log('I got this error when i try to search:', err);
+        Alert.alert('Something went wrong, please try again');
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -20,15 +40,24 @@ const SearchScreen = () => {
         <TextInput
           onChangeText={(text) => setSearchValue(text)}
           value={searchValue}
+          placeholder='search'
           onSubmitEditing={() => {
             //   this function is called when enter is pressed
+            searchFunc();
           }}
           style={[styles?.w70, styles?.searchInput]}
         />
-        <Ionicons name='md-send' size={32} color='#212121' />
+        <Ionicons
+          name='md-send'
+          size={32}
+          color='#212121'
+          onPress={() => {
+            searchFunc();
+          }}
+        />
       </View>
 
-      <ScrollView>
+      <ScrollView style={{ paddingBottom: 0, marginBottom: 20 }}>
         <MiniCard />
         <MiniCard />
         <MiniCard />
