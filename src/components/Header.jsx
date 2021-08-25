@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Constant from 'expo-constants';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignContent: 'center',
     elevation: 6,
-    marginTop: Constant?.statusBarHeight,
   },
   row: {
     flexDirection: 'row',
