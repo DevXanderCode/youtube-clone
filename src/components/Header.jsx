@@ -1,17 +1,24 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-
+import Constant from 'expo-constants';
 // icons
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 const Header = () => {
+  const myColor = '#212121';
   return (
     <View style={styles?.container}>
-      <View>
-        <Entypo name='youtube' size={24} color='red' />
+      <View style={styles?.row}>
+        <AntDesign name='youtube' size={32} style={{ marginLeft: 20 }} color='red' />
+        <Text style={[styles?.ml5, { fontSize: 22, fontWeight: '700', color: myColor }]}>
+          YouTube
+        </Text>
       </View>
-      <View></View>
-      <Text>Hello from the Header Component</Text>
+      <View style={[styles?.row, { justifyContent: 'space-around', width: 150 }]}>
+        <Ionicons name='md-videocam' size={32} color={myColor} />
+        <Ionicons name='md-search' size={32} color={myColor} />
+        <MaterialIcons name='account-circle' size={32} color={myColor} />
+      </View>
     </View>
   );
 };
@@ -20,8 +27,23 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 40,
+    height: 45,
     backgroundColor: 'white',
+    alignContent: 'center',
+    elevation: 6,
+    marginTop: Constant?.statusBarHeight,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  m5: {
+    margin: 5,
+  },
+  ml5: {
+    marginLeft: 5,
   },
 });
 
