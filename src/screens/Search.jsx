@@ -9,6 +9,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
+import Constant from 'expo-constants';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
@@ -87,6 +88,7 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Constant?.statusBarHeight,
   },
   row: {
     flexDirection: 'row',
