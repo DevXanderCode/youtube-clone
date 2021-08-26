@@ -35,7 +35,7 @@ const RootHome = () => {
           }
 
           // You can return any component that you like here!
-          return <MaterialIcons name={iconName} size={size} color={color} />;
+          return <MaterialIcons name={iconName} size={30} color={color} />;
         },
       })}
       tabBarOptions={{
