@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-const Explore = () => {
+const Subcribe = () => {
   return (
     <View style={styles.container}>
-      <Text>Hello from the Explore Screen</Text>
+      <Text>Hello from the Subcribe Screen</Text>
     </View>
   );
 };
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Explore;
+export default Subcribe;
