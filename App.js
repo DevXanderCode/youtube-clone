@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+// icons
+import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
+
 // screens
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
@@ -17,7 +20,29 @@ const Tabs = createBottomTabNavigator();
 
 const RootHome = () => {
   return (
-    <Tabs.Navigator initialRouteName='home'>
+    <Tabs.Navigator
+      initialRouteName='home'
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'home') {
+            iconName = 'home';
+          } else if (route.name === 'explore') {
+            iconName = focused ? 'explore' : 'explore';
+          } else if (route.name === 'subscribe') {
+            iconName = 'subscriptions';
+          }
+
+          // You can return any component that you like here!
+          return <MaterialIcons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+    >
       <Tabs.Screen name='home' component={Home} />
       <Tabs.Screen name='explore' component={Explore} />
       <Tabs.Screen name='subscribe' component={Subcribe} />
