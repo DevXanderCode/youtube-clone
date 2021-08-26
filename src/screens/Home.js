@@ -11,14 +11,7 @@ const HomeScreen = () => {
   return (
     <View style={styles?.container}>
       <Header />
-      {/* <ScrollView>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </ScrollView> */}
+
       <FlatList
         data={searchResult}
         renderItem={({ item }) => (
