@@ -17,7 +17,7 @@ const Tabs = createBottomTabNavigator();
 
 const RootHome = () => {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator initialRouteName='home'>
       <Tabs.Screen name='home' component={Home} />
       <Tabs.Screen name='explore' component={Explore} />
       <Tabs.Screen name='subscribe' component={Subcribe} />
@@ -28,7 +28,7 @@ const RootHome = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode='none'>
+      <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
         <Stack.Screen name='rootHome' component={RootHome} />
         <Stack.Screen name='search' component={Search} />
         <Stack.Screen name='videoPlayer' component={VideoPlayer} />
