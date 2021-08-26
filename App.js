@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+// redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 // navigations
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,6 +17,8 @@ import Search from './src/screens/Search';
 import Explore from './src/screens/Explore';
 import Subcribe from './src/screens/Subcribe';
 import VideoPlayer from './src/screens/VideoPlayer';
+
+const store = createStore();
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -52,13 +57,15 @@ const RootHome = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
-        <Stack.Screen name='rootHome' component={RootHome} />
-        <Stack.Screen name='search' component={Search} />
-        <Stack.Screen name='videoPlayer' component={VideoPlayer} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
+          <Stack.Screen name='rootHome' component={RootHome} />
+          <Stack.Screen name='search' component={Search} />
+          <Stack.Screen name='videoPlayer' component={VideoPlayer} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
