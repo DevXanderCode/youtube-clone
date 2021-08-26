@@ -26,7 +26,7 @@ const MiniCard = ({ channel, title, videoId, createdAt }) => {
     <View style={[styles?.container, styles?.row]}>
       <Image
         source={{
-          uri: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+          uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         }}
         style={styles?.imgStyle}
       />
@@ -34,7 +34,7 @@ const MiniCard = ({ channel, title, videoId, createdAt }) => {
         <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={3}>
           {title}
         </Text>
-        <View style={[styles?.row, { width: '70%' }]}>
+        <View style={[styles?.row, { width: '50' }]}>
           <Text>{channel}</Text>
           <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
         </View>
@@ -46,7 +46,8 @@ const MiniCard = ({ channel, title, videoId, createdAt }) => {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    marginBottom: 0,
+    marginTop: 5,
+    marginBottom: 5,
   },
   row: {
     flexDirection: 'row',

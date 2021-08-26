@@ -67,22 +67,19 @@ const SearchScreen = () => {
           }}
         />
       </View>
-      {isLoading ? (
-        <ActivityIndicator style={{ marginTop: 15 }} size='large' color='red' />
-      ) : (
-        <FlatList
-          data={searchResult}
-          renderItem={({ item }) => (
-            <MiniCard
-              videoId={item?.id?.videoId}
-              title={item?.snippet?.title}
-              channel={item?.snippet?.channelTitle}
-              createdAt={item?.snippet?.publishedAt}
-            />
-          )}
-          keyExtractor={(item) => item?.id?.videoId}
-        />
-      )}
+      {isLoading && <ActivityIndicator style={{ marginTop: 15 }} size='large' color='red' />}
+      <FlatList
+        data={searchResult}
+        renderItem={({ item }) => (
+          <MiniCard
+            videoId={item?.id?.videoId}
+            title={item?.snippet?.title}
+            channel={item?.snippet?.channelTitle}
+            createdAt={item?.snippet?.publishedAt}
+          />
+        )}
+        keyExtractor={(item) => item?.id?.videoId}
+      />
     </View>
   );
 };
