@@ -15,7 +15,7 @@ import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import MiniCard from '../components/MiniCard';
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [searchValue, setSearchValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -48,7 +48,12 @@ const SearchScreen = () => {
           { padding: 5, elevation: 5, backgroundColor: '#fff' },
         ]}
       >
-        <Ionicons name='md-arrow-back' size={32} color='#212121' />
+        <Ionicons
+          name='md-arrow-back'
+          size={32}
+          color='#212121'
+          onPress={() => navigation.goBack()}
+        />
         <TextInput
           onChangeText={(text) => setSearchValue(text)}
           value={searchValue}
