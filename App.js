@@ -18,7 +18,10 @@ import Explore from './src/screens/Explore';
 import Subcribe from './src/screens/Subcribe';
 import VideoPlayer from './src/screens/VideoPlayer';
 
-const store = createStore();
+// reducer
+import { reducer } from './src/reducers/reducer';
+
+const store = createStore(reducer);
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();

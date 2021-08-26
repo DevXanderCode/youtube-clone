@@ -9,6 +9,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import Constant from 'expo-constants';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
@@ -17,8 +18,11 @@ import MiniCard from '../components/MiniCard';
 
 const SearchScreen = ({ navigation }) => {
   const [searchValue, setSearchValue] = React.useState('');
-  const [searchResult, setSearchResult] = React.useState([]);
+  // const [searchResult, setSearchResult] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const { searchResult } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
   //   console.log('Logging api key', process.env.REACT_APP_API_KEY);
 
   const searchFunc = () => {
@@ -29,7 +33,8 @@ const SearchScreen = ({ navigation }) => {
       .then((res) => res.json())
       .then((result) => {
         // console.log('Logging search result', result);
-        setSearchResult(result.items);
+        // setSearchResult(result.items);
+        dispatch({ type: 'SEARCH', payload: result?.items });
         setIsLoading(false);
       })
       .catch((err) => {
