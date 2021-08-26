@@ -1,22 +1,36 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 import Constant from 'expo-constants';
 // layout
 import Header from '../components/Header';
 import Card from '../components/Card';
 
 const HomeScreen = () => {
+  const { searchResult } = useSelector((state) => state);
   return (
     <View style={styles?.container}>
       <Header />
-      <ScrollView>
+      {/* <ScrollView>
         <Card />
         <Card />
         <Card />
         <Card />
         <Card />
         <Card />
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        data={searchResult}
+        renderItem={({ item }) => (
+          <Card
+            videoId={item?.id?.videoId}
+            title={item?.snippet?.title}
+            channel={item?.snippet?.channelTitle}
+            createdAt={item?.snippet?.publishedAt}
+          />
+        )}
+        keyExtractor={(item) => item?.id?.videoId}
+      />
     </View>
   );
 };

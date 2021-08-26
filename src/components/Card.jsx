@@ -2,13 +2,14 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { dateFunc } from '../utils/DateTimeController';
 
-const Card = () => {
+const Card = ({ channel, title, videoId, createdAt }) => {
   return (
     <View style={styles?.container}>
       <Image
         source={{
-          uri: 'https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+          uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         }}
         style={styles?.imgStyle}
       />
@@ -18,10 +19,12 @@ const Card = () => {
         </View>
         <View style={styles?.ml10}>
           <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={2}>
-            This the name of the Video, but the name of this video is very very very long so we can
-            test the shorten of the text with react native
+            {title}
           </Text>
-          <Text>This the name of the channel</Text>
+          <View style={[styles?.row, { width: '52%' }]}>
+            <Text>{channel}</Text>
+            <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+          </View>
         </View>
       </View>
     </View>
