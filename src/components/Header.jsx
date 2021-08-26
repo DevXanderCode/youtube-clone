@@ -1,9 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 const Header = () => {
+  const navigation = useNavigation();
   const myColor = '#212121';
   return (
     <View style={styles?.container}>
@@ -15,7 +17,12 @@ const Header = () => {
       </View>
       <View style={[styles?.row, { justifyContent: 'space-around', width: 150 }]}>
         <Ionicons name='md-videocam' size={32} color={myColor} />
-        <Ionicons name='md-search' size={32} color={myColor} />
+        <Ionicons
+          name='md-search'
+          size={32}
+          color={myColor}
+          onPress={() => navigation.navigate('search')}
+        />
         <MaterialIcons name='account-circle' size={32} color={myColor} />
       </View>
     </View>
