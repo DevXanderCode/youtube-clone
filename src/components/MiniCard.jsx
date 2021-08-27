@@ -1,26 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import { dateFunc } from '../utils/DateTimeController';
 
 const MiniCard = ({ channel, title, videoId, createdAt }) => {
+  const navigation = useNavigation();
   return (
-    <View style={[styles?.container, styles?.row]}>
-      <Image
-        source={{
-          uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-        }}
-        style={styles?.imgStyle}
-      />
-      <View style={styles?.textContainer}>
-        <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={3}>
-          {title}
-        </Text>
-        <View style={[styles?.row, { width: '52%' }]}>
-          <Text>{channel}</Text>
-          <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('videoPlayer', { videoId, title });
+      }}
+    >
+      <View style={[styles?.container, styles?.row]}>
+        <Image
+          source={{
+            uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+          }}
+          style={styles?.imgStyle}
+        />
+        <View style={styles?.textContainer}>
+          <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={3}>
+            {title}
+          </Text>
+          <View style={[styles?.row, { width: '52%' }]}>
+            <Text>{channel}</Text>
+            <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
