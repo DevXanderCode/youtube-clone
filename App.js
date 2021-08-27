@@ -82,7 +82,7 @@ const RootHome = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer theme={customDarkTheme}>
+      <NavigationContainer theme={customDefaultTheme}>
         <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
           <Stack.Screen name='rootHome' component={RootHome} />
           <Stack.Screen name='search' component={Search} />
