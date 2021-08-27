@@ -1,12 +1,10 @@
-const initialState = { searchResult: [] };
+const initialState = [];
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SEARCH':
-      return {
-        ...state,
-        searchResult: action?.payload,
-      };
+      return action?.payload;
+
     default:
       return state;
   }

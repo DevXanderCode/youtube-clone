@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { useTheme } from '@react-navigation/native';
 // icons
@@ -9,6 +10,8 @@ const Header = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
   const myColor = colors?.iconColor;
+
+  const dispatch = useDispatch();
   return (
     <View style={[styles?.container, { backgroundColor: colors?.headerColor }]}>
       <View style={styles?.row}>
@@ -25,7 +28,12 @@ const Header = () => {
           color={myColor}
           onPress={() => navigation.navigate('search')}
         />
-        <MaterialIcons name='account-circle' size={32} color={myColor} />
+        <MaterialIcons
+          name='account-circle'
+          size={32}
+          color={myColor}
+          onPress={() => dispatch({ type: 'CHANGE_THEME' })}
+        />
       </View>
     </View>
   );

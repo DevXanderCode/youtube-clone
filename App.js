@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 // redux
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { Provider, useSelector } from 'react-redux';
 // navigations
 import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,8 +20,14 @@ import VideoPlayer from './src/screens/VideoPlayer';
 
 // reducer
 import { reducer } from './src/reducers/reducer';
+import { themeReducer } from './src/reducers/themeReducer';
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+  searchResult: reducer,
+  myDarkMode: themeReducer,
+});
+
+const store = createStore(rootReducer);
 
 const customDarkTheme = {
   ...DarkTheme,
@@ -79,19 +85,26 @@ const RootHome = () => {
   );
 };
 
-export default function App() {
+export function Navigations() {
+  const { myDarkMode } = useSelector((state) => state);
   return (
-    <Provider store={store}>
-      <NavigationContainer theme={customDefaultTheme}>
-        <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
-          <Stack.Screen name='rootHome' component={RootHome} />
-          <Stack.Screen name='search' component={Search} />
-          <Stack.Screen name='videoPlayer' component={VideoPlayer} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    // <Provider store={store}>
+    <NavigationContainer theme={myDarkMode ? customDarkTheme : customDefaultTheme}>
+      <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
+        <Stack.Screen name='rootHome' component={RootHome} />
+        <Stack.Screen name='search' component={Search} />
+        <Stack.Screen name='videoPlayer' component={VideoPlayer} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // </Provider>
   );
 }
+
+export default () => (
+  <Provider store={store}>
+    <Navigations />
+  </Provider>
+);
 
 const styles = StyleSheet.create({
   container: {
