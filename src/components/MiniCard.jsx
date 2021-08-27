@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { useTheme } from '@react-navigation/native';
 import { dateFunc } from '../utils/DateTimeController';
 
 const MiniCard = ({ channel, title, videoId, createdAt }) => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
+
+  const textColor = colors?.iconColor;
   return (
     <TouchableOpacity
       onPress={() => {
@@ -19,12 +23,16 @@ const MiniCard = ({ channel, title, videoId, createdAt }) => {
           style={styles?.imgStyle}
         />
         <View style={styles?.textContainer}>
-          <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={3}>
+          <Text
+            style={[styles?.title, { color: textColor }]}
+            ellipsizeMode='tail'
+            numberOfLines={3}
+          >
             {title}
           </Text>
           <View style={[styles?.row, { width: '52%' }]}>
-            <Text>{channel}</Text>
-            <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+            <Text style={{ color: textColor }}>{channel}</Text>
+            <Text style={{ paddingLeft: 10, color: textColor }}>{dateFunc(createdAt)}</Text>
           </View>
         </View>
       </View>
