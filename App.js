@@ -28,6 +28,7 @@ const customDarkTheme = {
   colors: {
     ...DarkTheme?.colors,
     headerColor: '#404040',
+    iconColor: 'white',
   },
 };
 
@@ -36,6 +37,7 @@ const customDefaultTheme = {
   colors: {
     ...DefaultTheme?.colors,
     headerColor: '#fff',
+    iconColor: '#212121',
   },
 };
 

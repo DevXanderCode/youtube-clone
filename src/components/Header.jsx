@@ -8,7 +8,7 @@ import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 const Header = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
-  const myColor = '#212121';
+  const myColor = colors?.iconColor;
   return (
     <View style={[styles?.container, { backgroundColor: colors?.headerColor }]}>
       <View style={styles?.row}>
