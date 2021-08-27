@@ -1,33 +1,41 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { dateFunc } from '../utils/DateTimeController';
 
 const Card = ({ channel, title, videoId, createdAt }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles?.container}>
-      <Image
-        source={{
-          uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-        }}
-        style={styles?.imgStyle}
-      />
-      <View style={[styles?.row, styles?.m5]}>
-        <View>
-          <MaterialIcons name='account-circle' size={52} color='gray' />
-        </View>
-        <View style={styles?.ml10}>
-          <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={2}>
-            {title}
-          </Text>
-          <View style={[styles?.row, { width: '52%' }]}>
-            <Text>{channel}</Text>
-            <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('videoPlayer', { videoId, title });
+      }}
+    >
+      <View style={styles?.container}>
+        <Image
+          source={{
+            uri: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+          }}
+          style={styles?.imgStyle}
+        />
+        <View style={[styles?.row, styles?.m5]}>
+          <View>
+            <MaterialIcons name='account-circle' size={52} color='gray' />
+          </View>
+          <View style={styles?.ml10}>
+            <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={2}>
+              {title}
+            </Text>
+            <View style={[styles?.row, { width: '52%' }]}>
+              <Text>{channel}</Text>
+              <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
