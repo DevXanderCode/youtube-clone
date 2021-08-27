@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
 import Constant from 'expo-constants';
 
 import Header from '../components/Header';
+import Card from '../components/Card';
 
 const ExploreCard = ({ name }) => {
   return (
@@ -12,10 +14,9 @@ const ExploreCard = ({ name }) => {
   );
 };
 
-const Explore = () => {
+const ExploreHeader = () => {
   return (
-    <View style={styles.container}>
-      <Header />
+    <View>
       <View style={styles?.row}>
         <ExploreCard name='Gaming' />
         <ExploreCard name='Trending' />
@@ -25,6 +26,29 @@ const Explore = () => {
         <ExploreCard name='Fashion' />
       </View>
       <Text style={styles?.title}>Trending Videos</Text>
+    </View>
+  );
+};
+
+const Explore = () => {
+  const { searchResult } = useSelector((state) => state);
+  return (
+    <View style={styles.container}>
+      <Header />
+
+      <FlatList
+        data={searchResult}
+        renderItem={({ item }) => (
+          <Card
+            videoId={item?.id?.videoId}
+            title={item?.snippet?.title}
+            channel={item?.snippet?.channelTitle}
+            createdAt={item?.snippet?.publishedAt}
+          />
+        )}
+        ListHeaderComponent={ExploreHeader}
+        keyExtractor={(item) => item?.id?.videoId}
+      />
     </View>
   );
 };
