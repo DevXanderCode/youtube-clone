@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 // navigations
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -22,6 +22,22 @@ import VideoPlayer from './src/screens/VideoPlayer';
 import { reducer } from './src/reducers/reducer';
 
 const store = createStore(reducer);
+
+const customDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme?.colors,
+    headerColor: '#404040',
+  },
+};
+
+const customDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme?.colors,
+    headerColor: '#fff',
+  },
+};
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -61,7 +77,7 @@ const RootHome = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer theme={customDarkTheme}>
         <Stack.Navigator headerMode='none' initialRouteName='rootHome'>
           <Stack.Screen name='rootHome' component={RootHome} />
           <Stack.Screen name='search' component={Search} />

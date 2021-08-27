@@ -1,14 +1,16 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { useTheme } from '@react-navigation/native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 const Header = () => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
   const myColor = '#212121';
   return (
-    <View style={styles?.container}>
+    <View style={[styles?.container, { backgroundColor: colors?.headerColor }]}>
       <View style={styles?.row}>
         <AntDesign name='youtube' size={32} style={{ marginLeft: 20 }} color='red' />
         <Text style={[styles?.ml5, { fontSize: 22, fontWeight: '700', color: myColor }]}>
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 45,
-    backgroundColor: 'white',
+    // backgroundColor: colors?.headerColor,
     alignContent: 'center',
     elevation: 6,
   },

@@ -8,7 +8,11 @@ const VideoPlayer = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles?.videoContainer}>
-        <WebView source={{ uri: `https://www.youtube.com/embed/${videoId}` }} />
+        <WebView
+          source={{ uri: `https://www.youtube.com/embed/${videoId}` }}
+          javaScriptEnabled
+          domStorageEnabled
+        />
       </View>
       <Text style={styles?.title} numberOfLines={2} ellipsizeMode='tail'>
         {title}
