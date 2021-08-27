@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import Constant from 'expo-constants';
 
@@ -15,6 +16,8 @@ const ExploreCard = ({ name }) => {
 };
 
 const ExploreHeader = () => {
+  const { colors } = useTheme();
+  const textColor = colors?.iconColor;
   return (
     <View>
       <View style={styles?.row}>
@@ -25,7 +28,9 @@ const ExploreHeader = () => {
         <ExploreCard name='Movies' />
         <ExploreCard name='Fashion' />
       </View>
-      <Text style={styles?.title}>Trending Videos</Text>
+      <Text style={[styles?.title, { color: textColor, borderBottomColor: textColor }]}>
+        Trending Videos
+      </Text>
     </View>
   );
 };
