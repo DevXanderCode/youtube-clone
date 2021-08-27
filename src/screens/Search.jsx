@@ -9,6 +9,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Constant from 'expo-constants';
 // icons
@@ -23,6 +24,9 @@ const SearchScreen = ({ navigation }) => {
   const { searchResult } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+
+  const { colors } = useTheme();
+  const myColor = colors?.iconColor;
   //   console.log('Logging api key', process.env.REACT_APP_API_KEY);
 
   const searchFunc = () => {
@@ -50,13 +54,13 @@ const SearchScreen = ({ navigation }) => {
         style={[
           styles?.row,
           styles?.spaceAround,
-          { padding: 5, elevation: 5, backgroundColor: '#fff' },
+          { padding: 5, elevation: 5, backgroundColor: colors?.headerColor },
         ]}
       >
         <Ionicons
           name='md-arrow-back'
           size={32}
-          color='#212121'
+          color={myColor}
           onPress={() => navigation.goBack()}
         />
         <TextInput
@@ -72,7 +76,7 @@ const SearchScreen = ({ navigation }) => {
         <Ionicons
           name='md-send'
           size={32}
-          color='#212121'
+          color={myColor}
           onPress={() => {
             searchFunc();
           }}
