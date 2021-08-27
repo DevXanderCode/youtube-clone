@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 // navigations
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -29,6 +29,7 @@ const customDarkTheme = {
     ...DarkTheme?.colors,
     headerColor: '#404040',
     iconColor: 'white',
+    tabIcon: 'white',
   },
 };
 
@@ -38,6 +39,7 @@ const customDefaultTheme = {
     ...DefaultTheme?.colors,
     headerColor: '#fff',
     iconColor: '#212121',
+    tabIcon: 'red',
   },
 };
 
@@ -45,6 +47,7 @@ const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 const RootHome = () => {
+  const { colors } = useTheme();
   return (
     <Tabs.Navigator
       initialRouteName='home'
@@ -65,7 +68,7 @@ const RootHome = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'red',
+        activeTintColor: colors?.tabIcon,
         inactiveTintColor: 'gray',
       }}
     >
