@@ -47,7 +47,7 @@ const RootHome = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: 'red',
         inactiveTintColor: 'gray',
       }}
     >
