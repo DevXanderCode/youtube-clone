@@ -1,12 +1,15 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { useTheme } from '@react-navigation/native';
 // icons
 import { Entypo, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { dateFunc } from '../utils/DateTimeController';
 
 const Card = ({ channel, title, videoId, createdAt }) => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
+  const textColor = colors?.iconColor;
   return (
     <TouchableOpacity
       onPress={() => {
@@ -25,12 +28,16 @@ const Card = ({ channel, title, videoId, createdAt }) => {
             <MaterialIcons name='account-circle' size={52} color='gray' />
           </View>
           <View style={styles?.ml10}>
-            <Text style={styles?.title} ellipsizeMode='tail' numberOfLines={2}>
+            <Text
+              style={[styles?.title, { color: textColor }]}
+              ellipsizeMode='tail'
+              numberOfLines={2}
+            >
               {title}
             </Text>
             <View style={[styles?.row, { width: '52%' }]}>
-              <Text>{channel}</Text>
-              <Text style={{ paddingLeft: 10 }}>{dateFunc(createdAt)}</Text>
+              <Text style={{ color: textColor }}>{channel}</Text>
+              <Text style={{ paddingLeft: 10, color: textColor }}>{dateFunc(createdAt)}</Text>
             </View>
           </View>
         </View>
