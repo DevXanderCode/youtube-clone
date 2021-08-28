@@ -36,13 +36,17 @@ const ExploreHeader = () => {
 };
 
 const Explore = () => {
-  const { searchResult } = useSelector((state) => state);
+  const {
+    searchResult,
+    list: { trending },
+  } = useSelector((state) => state);
+
   return (
     <View style={styles.container}>
       <Header />
 
       <FlatList
-        data={searchResult}
+        data={searchResult?.length ? searchResult : trending}
         renderItem={({ item }) => (
           <Card
             videoId={item?.id?.videoId}

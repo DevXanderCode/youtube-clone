@@ -21,10 +21,12 @@ import VideoPlayer from './src/screens/VideoPlayer';
 // reducer
 import { reducer } from './src/reducers/reducer';
 import { themeReducer } from './src/reducers/themeReducer';
+import { listReducer } from './src/reducers/listReducer';
 
 const rootReducer = combineReducers({
   searchResult: reducer,
   myDarkMode: themeReducer,
+  list: listReducer,
 });
 
 const store = createStore(rootReducer);
