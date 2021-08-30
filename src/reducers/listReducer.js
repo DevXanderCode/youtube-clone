@@ -10,6 +10,11 @@ export const listReducer = (state = initialState, action) => {
         ...state,
         trending: action?.payload,
       };
+    case 'SHOW_MORE':
+      return {
+        ...state,
+        trending: [...state?.trending, ...action?.payload],
+      };
     case 'RANDOM':
       return {
         ...state,
