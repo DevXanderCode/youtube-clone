@@ -8,6 +8,7 @@ import {
   Alert,
   FlatList,
   ActivityIndicator,
+  Button,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,7 +20,8 @@ import MiniCard from '../components/MiniCard';
 
 const SearchScreen = ({ navigation }) => {
   const [searchValue, setSearchValue] = React.useState('');
-  // const [searchResult, setSearchResult] = React.useState([]);
+  const [count, setCount] = React.useState(10);
+  const [moreLoading, setMoreLoading] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { searchResult } = useSelector((state) => state);
 
@@ -46,6 +48,47 @@ const SearchScreen = ({ navigation }) => {
         Alert.alert('Something went wrong, please try again');
         setIsLoading(false);
       });
+  };
+
+  const moreSearch = () => {
+    setMoreLoading(true);
+    setCount((prevCount) => prevCount + 10);
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${
+        count + 10
+      }&q=${searchValue}&type=video&key=AIzaSyB9ZnNfz9BFES4TZradArd7BxgP9Q52R0s`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        // console.log('Logging search result', result);
+        // setSearchResult(result.items);
+        dispatch({
+          type: 'MORE_SEARCH',
+          payload: result?.items.slice(Math.max(result?.items.length - 10, 0)),
+        });
+        setMoreLoading(false);
+      })
+      .catch((err) => {
+        console.log('I got this error when i try to search:', err);
+        Alert.alert('Something went wrong, please try again');
+        setMoreLoading(false);
+      });
+  };
+
+  const moreButton = () => {
+    return (
+      <>
+        {searchResult?.length && !isLoading ? (
+          moreLoading ? (
+            <ActivityIndicator style={{ marginTop: 15 }} size='large' color='gray' />
+          ) : (
+            <View style={{ margin: 10 }}>
+              <Button onPress={moreSearch} title='Show More' style={{ margin: 10 }} />
+            </View>
+          )
+        ) : null}
+      </>
+    );
   };
 
   return (
@@ -94,6 +137,7 @@ const SearchScreen = ({ navigation }) => {
           />
         )}
         keyExtractor={(item) => item?.id?.videoId}
+        ListFooterComponent={moreButton}
       />
     </View>
   );
